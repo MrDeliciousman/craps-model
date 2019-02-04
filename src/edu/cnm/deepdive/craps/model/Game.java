@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.craps.model;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +11,8 @@ public class Game {
   private State state;
   private Random rng;
   private List<int[]> rolls;
+  private long wins;
+  private long losses;
 
   public Game(Random rng) {
     this.rng = rng;
@@ -25,7 +28,7 @@ public class Game {
   private void roll() {
     int die0 = rng.nextInt(6) + 1;
     int die1 = rng.nextInt(6) + 1;
-    int sum = die1 + die1;
+    int sum = die0 + die1;
     State newState = state.change(sum,pointValue);
     if (state == State.COME_OUT && newState == State.POINT) {
       pointValue = sum;
@@ -38,6 +41,11 @@ public class Game {
   public State play() {
     while (state != State.WIN && state != State.LOSS) {
       roll();
+      if (state == State.WIN) {
+        wins++;
+      }else if (state == State.LOSS){
+        losses++;
+      }
     }
     return state;
   }
@@ -51,7 +59,18 @@ public class Game {
   }
 
   public List<int[]> getRolls() {
-    return new LinkedList<int[]>(rolls);
+    List<int[]> copy = new LinkedList<>();
+    for (int[] roll : rolls) {
+      copy.add(Arrays.copyOf(roll, roll.length));
+    }
+    return copy;
   }
 
+  public long getWins() {
+    return wins;
+  }
+
+  public long getLosses() {
+    return losses;
+  }
 }
