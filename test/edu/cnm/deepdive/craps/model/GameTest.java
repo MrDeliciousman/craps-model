@@ -16,6 +16,7 @@ class GameTest {
     game.reset();
     State state = game.play();
     List<int[]> rolls = game.getRolls();
+    assertNotEquals(0, rolls.size(), "A completed game must always have one or more rolls");
     switch (state) {
       case WIN:
         if (rolls.size() == 1) {
@@ -28,8 +29,6 @@ class GameTest {
           int firstSum =  firstRoll[0] + firstRoll[1];
           int lastSum = lastRoll[0] + lastRoll[1];
           assertEquals(firstSum, lastSum);
-        } else {
-          fail("A completed game must always have one or more rolls");
         }
         break;
       case LOSS:
@@ -44,9 +43,7 @@ class GameTest {
           int lastSum = lastRoll[0] + lastRoll[1];
           assertEquals(7, lastSum);
           assertNotEquals(7, firstSum);
-        } else {
-          fail("A completed game must always have 1 or more rolls.");
-        }
+        } 
         break;
         default:
           fail("A game should not result in any other state besides WIN or LOSS.");
