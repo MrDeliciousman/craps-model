@@ -1,5 +1,14 @@
 package edu.cnm.deepdive.craps.model;
 
+/**
+ * <code>State</code> implements a basic state machine for
+ * the main play of a
+ * game of Craps.
+ * @author raymondherrera  &amp; Deep Dive Coding Java +
+ * Android Cohort 6
+ * @version 1.0
+ */
+
 public enum State {
   COME_OUT {
     @Override
@@ -30,6 +39,13 @@ public enum State {
   },
   WIN,
   LOSS;
+
+  /**
+   *
+   * @param roll sum of dice in a current roll
+   * @param pointValue establishes point value (ignored
+   * @return
+   */
 
   public State change(int roll, int pointValue) {
     return this;

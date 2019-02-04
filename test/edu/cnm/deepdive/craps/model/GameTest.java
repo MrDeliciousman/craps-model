@@ -43,7 +43,7 @@ class GameTest {
           int lastSum = lastRoll[0] + lastRoll[1];
           assertEquals(7, lastSum);
           assertNotEquals(7, firstSum);
-        } 
+        }
         break;
         default:
           fail("A game should not result in any other state besides WIN or LOSS.");
